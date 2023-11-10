@@ -86,3 +86,73 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+function calculateProfit(){
+  profit=0;
+  finances.forEach((el)=>
+    profit+=el[1]
+  )
+  return profit;
+  //save 
+}
+
+function calculateAverageChange(){
+  sum = 0;
+  profitDifference = 0;
+  lastMonthProfit = 0;
+  thisMonthProfit = 0;
+  finances.forEach((el)=>{
+    thisMonthProfit = el[1];
+    profitDifference = thisMonthProfit - lastMonthProfit;
+    sum+=profitDifference;
+    lastMonthProfit = el[1];
+    console.log(profitDifference)
+  })
+  return sum/(finances.length-1)
+}
+
+function calculateGreatestProfitIncrease(){
+  lastMonthProfit = 0;
+  thisMonthProfit = 0;
+  greatestProfitIncrease = 0;
+  greatestProfitArr=[];
+
+  finances.forEach((el)=>{
+    thisMonthProfit = el[1];
+    if((thisMonthProfit - lastMonthProfit) > greatestProfitIncrease){
+      greatestProfitArr = el; 
+      greatestProfitIncrease = thisMonthProfit - lastMonthProfit
+    }
+    lastMonthProfit = el[1]
+  }
+  )
+  return  [greatestProfitArr[0], greatestProfitIncrease];
+}
+
+function calculateGreatestProfitDecrease(){
+  lastMonthProfit = 0;
+  thisMonthProfit = 0;
+  greatestProfitDecrease = 0;
+  leastProfitArr=[];
+
+  finances.forEach((el)=>{
+    thisMonthProfit = el[1];
+    if((thisMonthProfit - lastMonthProfit) < greatestProfitDecrease){
+      leastProfitArr = el; 
+      greatestProfitDecrease = thisMonthProfit - lastMonthProfit
+    }
+    lastMonthProfit = el[1]
+  }
+  )
+  return  [leastProfitArr[0], greatestProfitDecrease ];
+}
+
+calculateProfit();
+
+//Total number of months in the data set
+console.log(`Financial Analysis\n
+Total months: ${finances.length}\n
+Total: $${calculateProfit()}
+Average Change: ${calculateAverageChange()}
+Greatest Increase in Profits/Losses: ${calculateGreatestProfitIncrease()[0]} ($${calculateGreatestProfitIncrease()[1]})
+Greatest Decrease in Profits/Losses: ${calculateGreatestProfitDecrease()[0]} ($${calculateGreatestProfitDecrease()[1]})`)
