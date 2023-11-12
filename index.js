@@ -1,3 +1,4 @@
+//Total number of months in the data set
 var finances = [
   ['Jan-2010', 867884],
   ['Feb-2010', 984655],
@@ -89,26 +90,30 @@ var finances = [
 
 function calculateProfit(){
   profit=0;
+  //loop through each month and add profit for the month to the total profit
   finances.forEach((el)=>
     profit+=el[1]
   )
   return profit;
-  //save 
+
 }
 
 function calculateAverageChange(){
-  sum = 0;
-  profitDifference = 0;
-  lastMonthProfit = 0;
+  totalProfitChange = 0
+  profitDifferenceMonthOverMonth = 0;
+  lastMonthProfit = 867884;
   thisMonthProfit = 0;
+
   finances.forEach((el)=>{
     thisMonthProfit = el[1];
-    profitDifference = thisMonthProfit - lastMonthProfit;
-    sum+=profitDifference;
+    //find the change in profit for the current month
+    profitDifferenceMonthOverMonth = thisMonthProfit - lastMonthProfit;
+    //add it to the totalProfitChange for all months
+    totalProfitChange+=profitDifferenceMonthOverMonth;
     lastMonthProfit = el[1];
-    console.log(profitDifference)
   })
-  return sum/(finances.length-1)
+  return ((totalProfitChange)/(finances.length-1)).toFixed(2);
+
 }
 
 function calculateGreatestProfitIncrease(){
@@ -119,10 +124,14 @@ function calculateGreatestProfitIncrease(){
 
   finances.forEach((el)=>{
     thisMonthProfit = el[1];
+      /* find the change in profit for the current month, 
+      compared to the last month and check if it is the 
+      greatest profit increase so far*/
     if((thisMonthProfit - lastMonthProfit) > greatestProfitIncrease){
       greatestProfitArr = el; 
       greatestProfitIncrease = thisMonthProfit - lastMonthProfit
     }
+    //Reset the last month's profit value for future comparison
     lastMonthProfit = el[1]
   }
   )
@@ -137,22 +146,25 @@ function calculateGreatestProfitDecrease(){
 
   finances.forEach((el)=>{
     thisMonthProfit = el[1];
+    /* find the change in profit for the current month, 
+    compared to the last month and check if it is the 
+    greatest profit decrease so far*/
     if((thisMonthProfit - lastMonthProfit) < greatestProfitDecrease){
       leastProfitArr = el; 
       greatestProfitDecrease = thisMonthProfit - lastMonthProfit
     }
+    //Reset the last month's profit value for future comparison
     lastMonthProfit = el[1]
   }
   )
   return  [leastProfitArr[0], greatestProfitDecrease ];
 }
 
-calculateProfit();
-
-//Total number of months in the data set
-console.log(`Financial Analysis\n
-Total months: ${finances.length}\n
+console.log(`Financial Analysis
+-------------------
+Total Months: ${finances.length}
 Total: $${calculateProfit()}
 Average Change: ${calculateAverageChange()}
 Greatest Increase in Profits/Losses: ${calculateGreatestProfitIncrease()[0]} ($${calculateGreatestProfitIncrease()[1]})
-Greatest Decrease in Profits/Losses: ${calculateGreatestProfitDecrease()[0]} ($${calculateGreatestProfitDecrease()[1]})`)
+Greatest Decrease in Profits/Losses: ${calculateGreatestProfitDecrease()[0]} ($${calculateGreatestProfitDecrease()[1]})
+`)
