@@ -8,6 +8,8 @@ Here is the link to the deployed application: https://whefert.github.io/Console-
 
 See screenshot of the JavaScript console below.
 
+![Screenshot of JavaScript Console Application](https://github.com/Whefert/Console-Finances/blob/main/images/final-application-screenshot.png)
+
 ## Acceptance Criteria
 
 The JavaScript code analyzes the records to calculate each of the following:
