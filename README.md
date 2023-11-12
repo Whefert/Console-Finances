@@ -45,11 +45,11 @@ N/A
 
 ## Usage
 
-To view my work portfolio website, simply visit the url for the deployed application and use the links in the header to navigate the page.
+To view the finances report, simply visit the url for the deployed application and open the console.
 
 ## Credits
 
-This application uses the Bootsrap front-end framework.
+N/A
 
 ## License
 
